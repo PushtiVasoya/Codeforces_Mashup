@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Status</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+
+        <div class="center">
+            <img src="https://codeforces.org/s/84360/images/codeforces-sponsored-by-ton.png" alt="codeforces" height="100px">
+        </div>
+
+        <nav>
+            <div class="box1">
+                <ul>
+                    <li class="navfont" > Status </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="container1" id="input">
+        <span>
+            <label for="userhandle"> User handle : </label>
+            <input type="text" id="userhandle" name="userhandle" class="input-text" placeholder="Enter User Handle" >
+            
+        </span>
+        <span>
+            <label for="numberOfQuestions"> Enter number of Questions : </label>
+            <input type="number" name="numberOfQuestions" id="numberOfQuestions" class="input-text" placeholder="Enter Integer Index">
+        </span>
+        <span>
+            <label for="tags"> Tags (comma-separated) : </label>
+            <input type="text" name="tags" id="tags" class="input-text" placeholder="Enter Tags">
+        </span>
+        <span>
+            <!-- <input type="submit" value="Submit"> -->
+            <button id="submitButton">Submit</button>
+        </span>
+        </div>
+        <div class="container2">
+            <h1>User Submissions Status :</h1>
+            <div class="tablecontainer"> </div>
+        </div>
+
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+*{
+    margin: 3;
+    padding: 0;
+}
+
+.container{
+    margin: 2px;
+    padding: 10px;
+    border: 2px solid black;
+    height: 100vh;
+    width: 100%;
+}
+.center{
+    display: block;
+    width:33%;
+    height: 120px;
+    /* justify-content: center; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div nav{
+    margin: auto;
+    /* margin-left: 10px; */
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    /* width: 100%; */
+    border: 2px solid rgba(165, 165, 163, 0.742);
+    height: 3vw;
+    border-radius: 5px;
+    position : relative;
+}
+
+.box1{
+    padding: px;
+    /* margin: 2px; */
+}
+
+.navfont{
+    font-size: 20px;
+}
+nav ul li{
+    list-style: None;
+    padding: 10px;
+    /* border: 2px solid black; */
+    border-radius: 6px;
+    background-color: rgba(230, 227, 227, 0.626);
+    font-weight: bold;
+}
+
+.container1{
+    margin-top: 20px;
+    margin-left: 40px;
+    position: relative;
+    border: 2px solid black;
+    height: 30vh;
+    border: 2px solid white;
+    align-items: center;
+}
+
+.input-text{
+    
+    padding: 10px;
+    margin: 5px;
+    width: 200px;
+    border: 1px solid rgba(100, 96, 96, 0.963);
+    border-radius: 5px;
+    font-size: 10px;
+}
+
+.container1 span{
+    /* align-content: center; */
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    margin: 5px;
+    padding: 5px;
+}
+
+.container2 {
+    position: relative;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,td{
+    border: 1px solid black;
+    padding: 8px;
+}
+
+th{
+    background-color: rgb(130, 127, 127);
+}
