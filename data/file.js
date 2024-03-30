@@ -10,11 +10,13 @@ async function fetchDataAndSaveToCSV(apiUrl, filename) {
         const csvData = problems.map(problem => [
             problem.rating || '', // If rating doesn't exist, use empty string
             problem.name || '',   // If name doesn't exist, use empty string
-            (problem.tags || []).join(';') || '' // If tags don't exist, use empty string; join tags with semicolon
+            (problem.tags || []).join(';') || '', // If tags don't exist, use empty string; join tags with semicolon
+            problem.contestId || '',
+            problem.index || ''
         ]);
 
         // Add CSV header
-        csvData.unshift(['Rating', 'Problem Name', 'Tags']);
+        csvData.unshift(['Rating', 'Problem Name', 'Tags', 'ContestID', 'Index']);
 
         // Convert CSV data to a string
         const csvString = csvData.map(row => row.join(',')).join('\n');

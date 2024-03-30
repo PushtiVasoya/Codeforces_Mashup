@@ -3,49 +3,28 @@ document.getElementById('submitButton').addEventListener('click',function() {
     var userhandle = document.getElementById('userhandle').value.split(',');
     var numberOfQuestions = document.getElementById('numberOfQuestions').value;
     var tags = document.getElementById('tags').value.split(',');
+    var rating = document.getElementById('rate').value;
 
 
 var pdata = {
     userhandle: userhandle,
     numberOfQuestions: numberOfQuestions,
-    tags: tags
+    tags: tags,
+    rating: rating
 };
 
-/*
-var jsonData = JSON.stringify(pdata);
-for (let i=0; i<userhandle.length; i++){
-    let finalProblems=[]
-    let p=fetch('https://codeforces.com/api/user.status?handle='+pdata.userhandle);
-
-p.then(response => response.json())
-.then(data => {
-    var tableContainer = document.getElementById('tableContainer');
-    var table = document.createElement('table');
-    var thead = document.createElement('thead');
-    var headerRow = document.createElement('tr');
-
-    let problems=[];
-    problems=problem(data.result);
-    //console.log(problems);
-    finalProblems.push[problems];
-    console.log(finalProblems);
-
-    let f=[];
-    f=final(t,problems,numberOfQuestions);
-    console.log(f);
-    console.log(pdata);
-    display(pdata);
-    })
-.catch((error) => {
-    console.error('Error: ',error);
-});
+class data {
+    constructor(){
+    this.qname= null;
+    this.contestId= null;
+    this.index= null;
 }
-*/
+}
 
-fetchUserData(userhandle,tags,numberOfQuestions);
+fetchUserData(userhandle,tags,numberOfQuestions,rating);
 
 //function to fetch user data
-async function fetchUserData(userhandle,tags,numberOfQuestions) {
+async function fetchUserData(userhandle,tags,numberOfQuestions,rating) {
     try {
         let prblmSet=[];
         for (let i = 0; i < userhandle.length; i++){
@@ -60,11 +39,13 @@ async function fetchUserData(userhandle,tags,numberOfQuestions) {
         }
         console.log(prblmSet);
         console.log(tags);
-        let searchResults= await searchInCSV(prblmSet,tags);
+        let searchResults= await searchInCSV(prblmSet,tags,rating);
         console.log(searchResults);
         let finalPrblms=final(searchResults,numberOfQuestions);
         console.log(finalPrblms);
-        return finalPrblms;
+        let finalLst = prblmIds(finalPrblms);
+        console.log(finalLst);
+        return finalLst;
 
     } catch (error) {
         console.error('Error fetching user data:', error);
@@ -98,8 +79,31 @@ function final(searchResults,numberOfQuestions){      //list of not solved que
     return f;      
 };
 
+/*
+function prblmIds(finalPrblms){
+    let finalLst=[];
+    let str='';
+    for (let i=0; i<finalPrblms.length; i++){
+        str = finalPrblms[i][3] + '-' + finalPrblms[i][4];
+        finalLst.push(str);
+    }
+    return finalLst;
+}
+*/
 
-async function searchInCSV(prblmSet,tags) {
+function prblmIds(finalPrblms){
+    let l=[];
+    for (let i=0; i<finalPrblms.length; i++){
+        const que = new data();
+        que.qname = finalPrblms[i][1];
+        que.contestId = finalPrblms[i][3];
+        que.index = finalPrblms[i][4];
+        l.push(que);
+    }
+    return l
+}
+
+async function searchInCSV(prblmSet,tags,rating) {
     try {
         const response = await fetch('data.csv');
         const csvData = await response.text();
@@ -115,7 +119,11 @@ async function searchInCSV(prblmSet,tags) {
                 //console.log(options);
                 if (tags != ['']){
                     if (tags.some(item => options.includes(item))){
-                        searchResults.push(columns);
+                        //console.log(columns[0]);
+                        console.log(rating);
+                        if (parseInt(columns[0])==rating){
+                            searchResults.push(columns);
+                        }  
                     }
                 }
                 else{
